@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:12.3-alpine
+    environment:
+      TZ: UTC
+      PGTZ: UTC
+      POSTGRES_PASSWORD: $DB_PASSWORD # POSTGRES_PASSWORDという環境変数でDB:create時の初期パスワードとして設定される
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: ./api
+      args:
+        WORKDIR: $WORKDIR
+        DB_NAME: $DB_NAME
+        DB_USERNAME: $DB_USERNAME
+        DB_PASSWORD: $DB_PASSWORD
+    volumes:
+      - ./api:/$WORKDIR
+      - api-bundle:/usr/local/bundle
+    depends_on:
+      - db
+    ports:
+      - '$API_PORT:$CONTAINER_PORT'
+
+  front:
+    build:
+      context: ./front
+      args:
+        WORKDIR: $WORKDIR
+        CONTAINER_PORT: $CONTAINER_PORT
+    # 開発環境で実行
+    command: yarn run dev
+    # 本番環境で実行
+    # command: yarn run build
+    # command: yarn start
+    volumes:
+      - ./front:/$WORKDIR
+      - front-node_modules:/$WORKDIR/node_modules
+    ports:
+      - '$FRONT_PORT:$CONTAINER_PORT'
+    depends_on:
+      - api
+
+volumes:
+  db-data:
+  api-bundle:
+  front-node_modules:
