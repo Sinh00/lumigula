@@ -13,11 +13,15 @@ services:
   api:
     build:
       context: ./api
+      # args: Dockerfileへ受け渡す引数
       args:
         WORKDIR: $WORKDIR
-        DB_NAME: $DB_NAME
-        DB_USERNAME: $DB_USERNAME
-        DB_PASSWORD: $DB_PASSWORD
+    # コンテナで使う環境変数
+    environment:
+      DB_NAME: $DB_NAME
+      DB_USERNAME: $DB_USERNAME
+      DB_PASSWORD: $DB_PASSWORD
+      API_DOMAIN: $API_DOMAIN
     volumes:
       - ./api:/$WORKDIR
       - api-bundle:/usr/local/bundle
@@ -29,13 +33,16 @@ services:
   front:
     build:
       context: ./front
+      # args: Dockerfileへ受け渡す引数
       args:
         WORKDIR: $WORKDIR
         CONTAINER_PORT: $CONTAINER_PORT
+    # コンテナで使う環境変数
+    environment:
+      API_URL: $API_URL
     # 開発環境で実行
     command: yarn run dev
     # 本番環境で実行
-    # command: yarn run build
     # command: yarn start
     volumes:
       - ./front:/$WORKDIR

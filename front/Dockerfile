@@ -17,4 +17,6 @@ WORKDIR ${HOME}
 
 # COPY . .
 
+# RUN yarn run build
+
 EXPOSE ${CONTAINER_PORT}

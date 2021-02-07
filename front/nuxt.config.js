@@ -9,7 +9,7 @@ export default {
     titleTemplate: '%s - front',
     title: 'front',
     htmlAttrs: {
-      lang: 'en',
+      lang: 'ja',
     },
     meta: [
       { charset: 'utf-8' },
@@ -23,7 +23,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['plugins/axios'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -43,7 +43,13 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    // クライアント側からのリクエストには[browserBaseURL]が使われる
+    // [browserBaseURL]のデフォルト値は[baseURL]
+    // [baseURL]のデフォルト値は[http://localhost:3000]
+    // [$API_URL]が存在する場合、[baseURL]は上書きされる→[$API_URL]で管理すれば設定不要
+    // browserBaseURL: 'http://localhost:3000',
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
