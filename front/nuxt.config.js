@@ -68,6 +68,7 @@ export default {
           success: colors.green.accent3,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
+          myblue: '1867C0',
         },
       },
     },
@@ -87,6 +88,12 @@ export default {
       },
     },
   },
+
+  publicRuntimeConfig: {
+    // /front/.envの環境変数を$configで呼び出せるようにする
+    appName: process.env.APP_NAME,
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 }
