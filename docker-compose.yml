@@ -9,6 +9,8 @@ services:
       POSTGRES_PASSWORD: $DB_PASSWORD # POSTGRES_PASSWORDという環境変数でDB:create時の初期パスワードとして設定される
     volumes:
       - db-data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
 
   api:
     build:
@@ -25,6 +27,8 @@ services:
     volumes:
       - ./api:/$WORKDIR
       - api-bundle:/usr/local/bundle
+    # server.pidファイルが残っていると新たなサーバが起動できないため削除
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     depends_on:
       - db
     ports:

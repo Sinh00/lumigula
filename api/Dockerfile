@@ -2,6 +2,7 @@ FROM ruby:2.7.1-alpine
 
 ARG WORKDIR
 
+# Dockerfile内で定義されたENVはコンテナへ渡される
 ENV RUNTIME_PACKAGES="linux-headers libxml2-dev make gcc libc-dev nodejs tzdata postgresql-dev postgresql git" \
     DEV_PACKAGES="build-base curl-dev" \
     HOME=/${WORKDIR} \
@@ -20,5 +21,3 @@ RUN apk update && \
     apk del build-dependencies
 
 COPY . .
-
-CMD ["rails", "server", "-b", "0.0.0.0"]
