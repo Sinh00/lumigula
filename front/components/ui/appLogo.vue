@@ -1,5 +1,5 @@
 <template>
-  <v-avatar color="blue" size="50" class="my-app-log">
+  <v-avatar color="black" size="34" class="my-app-log">
     <span class="white--text text-subtitle-2"> lumigula </span>
   </v-avatar>
 </template>
