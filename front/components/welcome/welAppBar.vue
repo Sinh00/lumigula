@@ -1,10 +1,13 @@
 <template>
-  <v-app-bar app dark>
-    <app-logo />
-
-    <v-toolbar-title class="hidden-mobile-and-down">
-      {{ appName }}
-    </v-toolbar-title>
+  <v-app-bar
+    app
+    :dark="!isScrollPoint"
+    :height="appBarHeight"
+    :color="toolbarStyle.color"
+    :elevation="toolbarStyle.elevation"
+  >
+    <app-logo @click.native="goTo('scroll-top')" />
+    <app-title class="hidden-mobile-and-down" />
 
     <v-spacer />
 
@@ -38,20 +41,47 @@
   </v-app-bar>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
+<script>
+export default {
   props: {
     menus: {
       type: Array,
       default: () => [],
     },
+    imgHeight: {
+      type: Number,
+      default: 0,
+    },
   },
-  data: ({ $config: { appName } }) => {
+  data({ $store }) {
     return {
-      appName,
+      scrollY: 0,
+      appBarHeight: $store.state.styles.beforeLogin.appBarHeight,
     }
   },
-})
+  computed: {
+    isScrollPoint() {
+      return this.scrollY > this.imgHeight - this.appBarHeight
+    },
+    toolbarStyle() {
+      const color = this.isScrollPoint ? 'white' : 'transparent'
+      const elevation = this.isScrollPoint ? 4 : 0
+      return { color, elevation }
+    },
+  },
+  mounted() {
+    window.addEventListener('scroll', this.onScroll)
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.onScroll)
+  },
+  methods: {
+    onScroll() {
+      this.scrollY = window.scrollY
+    },
+    goTo(id) {
+      this.$vuetify.goTo(`#${id}`)
+    },
+  },
+}
 </script>

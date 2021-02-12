@@ -32,6 +32,8 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
+    // https://github.com/nuxt-community/eslint-module
+    // '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
   ],
@@ -49,7 +51,6 @@ export default {
     // [browserBaseURL]のデフォルト値は[baseURL]
     // [baseURL]のデフォルト値は[http://localhost:3000]
     // [$API_URL]が存在する場合、[baseURL]は上書きされる→[$API_URL]で管理すれば設定不要
-    // browserBaseURL: 'http://localhost:3000',
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -60,14 +61,21 @@ export default {
       // dark: true,
       themes: {
         light: {
+          // primary: '4080BE',
+          // secondary: colors.amber.darken3,
+          // accent: colors.grey.darken3,
+          // info: '4FC1E9',
+          // background: 'f6f6f4',
+          // success: colors.green.accent3,
+          // warning: colors.amber.base,
+          // error: colors.deepOrange.accent4,
+          // myblue: '1867C0',
           primary: '4080BE',
-          secondary: colors.amber.darken3,
-          accent: colors.grey.darken3,
           info: '4FC1E9',
+          success: '44D69E',
+          warning: 'FEB65E',
+          error: 'FB8678',
           background: 'f6f6f4',
-          success: colors.green.accent3,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
           myblue: '1867C0',
         },
       },
@@ -75,6 +83,7 @@ export default {
   },
 
   i18n: {
+    strategy: 'no_prefix',
     locales: ['ja', 'en'],
     defaultLocale: 'ja',
     // Doc: https://kazupon.github.io/vue-i18n/api/#properties
