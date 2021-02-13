@@ -10,24 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_08_123028) do
+ActiveRecord::Schema.define(version: 2021_02_13_161613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
-    t.integer "lock_version", default: 0
-    t.string "user_id", null: false
+    t.bigint "user_id", null: false
     t.string "title", null: false
     t.text "description"
     t.string "picuture_name"
     t.string "picuture_path", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "lock_version", default: 0
     t.string "user_id", null: false
     t.string "user_name", null: false
     t.string "email", null: false
@@ -40,7 +48,9 @@ ActiveRecord::Schema.define(version: 2021_02_08_123028) do
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index "lower((email)::text)", name: "index_users_on_LOWER_email", unique: true
   end
 
+  add_foreign_key "likes", "posts"
+  add_foreign_key "likes", "users"
+  add_foreign_key "posts", "users"
 end

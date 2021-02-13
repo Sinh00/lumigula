@@ -39,6 +39,14 @@ group :development, :test do
   # vscode用デバッグ
   gem 'ruby-debug-ide'
   gem 'debase'
+  # テストツール
+  gem 'rspec-rails'
+  # modelのテストデータ作成
+  gem 'factory_bot_rails'
+  # modelのvalidationメソッド
+  gem 'shoulda-matchers'
+  # RSpecの高速化
+  gem 'spring-commands-rspec'
 end
 
 group :development do

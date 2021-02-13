@@ -1,6 +1,10 @@
 require "validator/email_validator"
 
 class User < ApplicationRecord
+  # アソシエーション
+  has_many :posts, dependent: :destroy
+  has_many :likes, dependent: :destroy
+
   # gem bcrypt
   has_secure_password
 

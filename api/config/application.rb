@@ -31,6 +31,15 @@ module Lumigula
 
     config.add_autoload_paths_to_load_path = false
 
+    # rails g model実行時に生成されるrspecファイルの設定
+    config.generators do |g|
+      g.test_framework :rspec,
+        view_specs: false,
+        helper_specs: false,
+        controller_specs: false,
+        routing_specs: false
+    end
+
     config.api_only = true
   end
 end
