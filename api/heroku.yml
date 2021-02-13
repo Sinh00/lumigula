@@ -10,6 +10,6 @@ build:
   docker:
     web: Dockerfile
   config:
-    WORKDIR: app
+    WORKDIR: lumigula
 run:
   web: bundle exec puma -C config/puma.rb
