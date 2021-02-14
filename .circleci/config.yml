@@ -8,11 +8,12 @@ jobs:
           RAILS_ENV: test
           DB_HOST: 127.0.0.1
           POSTGRES_USER: $DB_USERNAME
+          POSTGRES_PASSWORD: $DB_PASSWORD
       - image: circleci/postgres:12.3
         environment:
           POSTGRES_DB: $DB_NAME
           POSTGRES_USER: $DB_USERNAME
-          # POSTGRES_PASSWORD: $DB_PASSWORD
+          POSTGRES_PASSWORD: $DB_PASSWORD
           POSTGRES_HOST_AUTH_METHOD: trust
           TZ: UTC
           PGTZ: UTC
