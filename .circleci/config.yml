@@ -3,11 +3,11 @@ version: 2.1
 jobs:
   test_api:
     docker:
-      - image: circleci/ruby:2.7.1-alpine-stretch-node
+      - image: circleci/ruby:2.7.1
         environment:
           RAILS_ENV: test
           DB_HOST: 127.0.0.1
-      - image: circleci/postgres:12.3-alpine
+      - image: circleci/postgres:12.3
 
     working_directory: ~/repo
 
@@ -67,7 +67,7 @@ jobs:
 
   test_front:
     docker:
-      - image: circleci/node:14.4.0-alpine
+      - image: circleci/node:14.4.0
         environment:
           NODE_ENV: test
 
