@@ -9,6 +9,7 @@ jobs:
           DB_HOST: 127.0.0.1
           POSTGRES_USER: $DB_USERNAME
           POSTGRES_PASSWORD: $DB_PASSWORD
+          PGHOST: localhost
       - image: circleci/postgres:12.3
         environment:
           POSTGRES_DB: $DB_NAME
