@@ -11,7 +11,7 @@ development:
 
 test:
   <<: *default
-  host: <%= ENV['PGHOST'] || 'db' %>
+  host: <%= ENV['DB_HOST'] || 'db' %>
 
 production:
   <<: *default

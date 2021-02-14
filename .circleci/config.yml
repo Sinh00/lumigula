@@ -16,9 +16,10 @@ jobs:
     environment:
       # BUNDLE_JOBS: "4"
       # BUNDLE_RETRY: "3"
-      PGHOST: 127.0.0.1
-      PGUSER: $DB_USERNAME
-      PGPASSWORD: $DB_PASSWORD
+      DB_HOST: 127.0.0.1
+      DB_NAME: $DB_NAME
+      DB_USERNAME: $DB_USERNAME
+      DB_PASSWORD: $DB_PASSWORD
       RAILS_ENV: test
 
     working_directory: ~/lumigula
