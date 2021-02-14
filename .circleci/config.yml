@@ -5,22 +5,16 @@ jobs:
     docker:
       - image: circleci/ruby:2.7.1
         environment:
-          # RAILS_ENV: test
-          # DB_HOST: 127.0.0.1
+          RAILS_ENV: test
+          DB_HOST: 127.0.0.1
+          DB_NAME: lumigula
+          DB_USERNAME: posgtres
+          DB_PASSWORD: password
       - image: circleci/postgres:12.3
         environment:
-          POSTGRES_DB: $DB_NAME
-          POSTGRES_USER: $DB_USERNAME
-          POSTGRES_PASSWORD: $DB_PASSWORD
-          # POSTGRES_HOST_AUTH_METHOD: trust
-    environment:
-      # BUNDLE_JOBS: "4"
-      # BUNDLE_RETRY: "3"
-      DB_HOST: 127.0.0.1
-      DB_NAME: $DB_NAME
-      DB_USERNAME: $DB_USERNAME
-      DB_PASSWORD: $DB_PASSWORD
-      RAILS_ENV: test
+          POSTGRES_DB: lumigula
+          POSTGRES_USER: posgtres
+          POSTGRES_PASSWORD: password
 
     working_directory: ~/lumigula
 
