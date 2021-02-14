@@ -9,7 +9,11 @@ jobs:
           DB_HOST: 127.0.0.1
       - image: circleci/postgres:12.3
         environment:
-          POSTGRES_PASSWORD: password
+          POSTGRES_DB: $DB_NAME
+          POSTGRES_USER: $DB_USERNAME
+          POSTGRES_PASSWORD: $DB_PASSWORD
+          TZ: UTC
+          PGTZ: UTC
 
     working_directory: ~/repo
 
