@@ -20,3 +20,5 @@ WORKDIR ${HOME}
 # RUN yarn run build
 
 EXPOSE ${CONTAINER_PORT}
+
+# CMD ["yarn", "run", "start"]
