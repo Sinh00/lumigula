@@ -2,7 +2,7 @@
   <div id="logged-in-home">
     <v-parallax>
       <v-img
-        :src="homeImg"
+        src="https://picsum.photos/id/20/1920/1080?blur=5"
         alt="homeImg"
         :aspect-ratio="16 / 9"
         gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import homeImg from '~/assets/images/loggedIn/home.png'
+// import homeImg from '~/assets/images/loggedIn/home.png'
 
 export default {
   layout({ store }) {
@@ -86,7 +86,7 @@ export default {
   },
   data() {
     return {
-      homeImg,
+      // homeImg,
       container: {
         sm: 10,
         md: 8,
