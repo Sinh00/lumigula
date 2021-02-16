@@ -56,6 +56,11 @@ export default {
     welContact,
     welCompany,
   },
+  head() {
+    return {
+      titleTemplate: '',
+    }
+  },
   data() {
     return {
       imgHeight: 500,

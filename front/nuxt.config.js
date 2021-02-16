@@ -6,8 +6,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - front',
-    title: 'front',
+    titleTemplate: '%s - ' + process.env.APP_NAME,
+    title: process.env.APP_NAME,
     htmlAttrs: {
       lang: 'ja',
     },
@@ -51,6 +51,9 @@ export default {
     // [browserBaseURL]のデフォルト値は[baseURL]
     // [baseURL]のデフォルト値は[http://localhost:3000]
     // [$API_URL]が存在する場合、[baseURL]は上書きされる→[$API_URL]で管理すれば設定不要
+
+    // クロスサイトリクエスト時にCookieを使用することを許可する
+    credentials: true,
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

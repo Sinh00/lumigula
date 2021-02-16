@@ -26,9 +26,7 @@ module Lumigula
 
     config.time_zone = ENV["TZ"]
     config.active_record.default_timezone = :utc
-
     config.i18n.default_locale = :ja
-
     config.add_autoload_paths_to_load_path = false
 
     # rails g model実行時に生成されるrspecファイルの設定
@@ -39,6 +37,9 @@ module Lumigula
         controller_specs: false,
         routing_specs: false
     end
+
+    # Cookieを処理するmeddlewareを追加(APIモードにはデフォルトで入っていない)
+    config.middleware.use ActionDispatch::Cookies
 
     config.api_only = true
   end
