@@ -39,7 +39,7 @@ class User < ApplicationRecord
 
   # 共通のJSONレスポンス
   def my_json
-    as_json(only: [:id, :name, :email, :created_at])
+    as_json(only: [:id, :user_id, :user_name, :email, :created_at])
   end
 
   # プライベートメソッド

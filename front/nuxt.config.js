@@ -23,7 +23,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['plugins/axios', 'plugins/vuetify', 'plugins/myInject'],
+  plugins: ['plugins/auth', 'plugins/axios', 'plugins/vuetify', 'plugins/myInject', 'plugins/nuxtClientInit'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -104,6 +104,7 @@ export default {
   publicRuntimeConfig: {
     // /front/.envの環境変数を$configで呼び出せるようにする
     appName: process.env.APP_NAME,
+    cryptoKey: process.env.CRYPTO_KEY,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
