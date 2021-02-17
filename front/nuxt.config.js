@@ -6,8 +6,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - front',
-    title: 'front',
+    titleTemplate: '%s - ' + process.env.APP_NAME,
+    title: process.env.APP_NAME,
     htmlAttrs: {
       lang: 'ja',
     },
@@ -23,7 +23,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['plugins/axios', 'plugins/vuetify', 'plugins/myInject'],
+  plugins: ['plugins/auth', 'plugins/axios', 'plugins/vuetify', 'plugins/myInject', 'plugins/nuxtClientInit'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -51,6 +51,9 @@ export default {
     // [browserBaseURL]のデフォルト値は[baseURL]
     // [baseURL]のデフォルト値は[http://localhost:3000]
     // [$API_URL]が存在する場合、[baseURL]は上書きされる→[$API_URL]で管理すれば設定不要
+
+    // クロスサイトリクエスト時にCookieを使用することを許可する
+    credentials: true,
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -101,6 +104,7 @@ export default {
   publicRuntimeConfig: {
     // /front/.envの環境変数を$configで呼び出せるようにする
     appName: process.env.APP_NAME,
+    cryptoKey: process.env.CRYPTO_KEY,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

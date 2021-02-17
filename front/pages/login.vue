@@ -34,13 +34,23 @@ export default {
     }
   },
   methods: {
-    login() {
+    async login() {
       this.loading = true
-      setTimeout(() => {
-        this.$store.dispatch('login')
-        this.$router.replace('/')
-        this.loading = false
-      }, 1500)
+      if (this.isValid) {
+        await this.$axios
+          .$post('/api/v1/user_token', this.params)
+          .then((response) => this.authSuccessful(response))
+          .catch((error) => this.authFailure(error))
+      }
+      this.loading = false
+    },
+    // ログイン成功
+    async authSuccessful(response) {
+      await this.$auth.login(response)
+    },
+    // ログイン失敗
+    authFailure({ response }) {
+      console.log(response)
     },
   },
 }

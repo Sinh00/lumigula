@@ -1,11 +1,11 @@
 export const state = () => ({
-  loggedIn: false,
   styles: {
     beforeLogin: {
       appBarHeight: 56,
     },
   },
   current: {
+    user: null,
     project: null,
   },
   projects: [
@@ -20,23 +20,21 @@ export const state = () => ({
 export const getters = {}
 
 export const mutations = {
-  setLoggedIn(state, payload) {
-    state.loggedIn = payload
-  },
   setCurrentProject(state, payload) {
     state.current.project = payload
+  },
+  setCurrentUser(state, payload) {
+    state.current.user = payload
   },
 }
 
 export const actions = {
-  login({ commit }) {
-    commit('setLoggedIn', true)
-  },
-  logout({ commit }) {
-    commit('setLoggedIn', false)
-  },
   getCurrentProject({ state, commit }, params) {
     const currentProject = state.projects.find((project) => project.id === Number(params.id))
     commit('setCurrentProject', currentProject)
+  },
+  // 現在のユーザーを設定する
+  getCurrentUser({ commit }, user) {
+    commit('setCurrentUser', user)
   },
 }
