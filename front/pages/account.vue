@@ -7,9 +7,10 @@
 <script>
 export default {
   layout: 'loggedIn',
-  // /accountというパスが自動生成されるのでアクセス不可に設定
-  validate({ route }) {
-    return route.name !== 'account'
+  middleware({ route, redirect }) {
+    if (route.name === 'account') {
+      return redirect('/')
+    }
   },
 }
 </script>
