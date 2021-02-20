@@ -1,42 +1,58 @@
 <template>
-  <v-app dark>
-    <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
-    </h1>
-    <h1 v-else>
-      {{ otherError }}
-    </h1>
-    <NuxtLink to="/"> Home page </NuxtLink>
-  </v-app>
+  <v-container fill-height>
+    <v-row>
+      <v-col cols="12">
+        <v-card-title class="justify-center">
+          {{ status }}
+        </v-card-title>
+
+        <v-card-text class="text-center">
+          {{ message }}
+        </v-card-text>
+
+        <v-card-actions class="justify-center">
+          <v-icon> mdi-emoticon-sick-outline </v-icon>
+        </v-card-actions>
+
+        <v-card-actions class="justify-center">
+          <v-btn icon x-large color="myblue" @click="redirect">
+            <v-icon> mdi-home </v-icon>
+          </v-btn>
+        </v-card-actions>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 export default {
-  layout: 'empty',
+  layout: 'none',
   props: {
     error: {
       type: Object,
       default: null,
     },
   },
-  data() {
-    return {
-      pageNotFound: '404 Not Found',
-      otherError: 'An error occurred',
+  computed: {
+    status() {
+      return this.error.statusCode
+    },
+    message() {
+      const msg = this.error.message
+      const path = `error.${msg}`
+      return this.$te(path) ? this.$t(path) : msg
+    },
+  },
+  async created() {
+    // 認証エラーの場合はログアウト処理を行う
+    if (this.status === 401) {
+      await this.$auth.logout()
     }
   },
-  head() {
-    const title =
-      this.error.statusCode === 404 ? this.pageNotFound : this.otherError
-    return {
-      title,
-    }
+  methods: {
+    redirect() {
+      return this.$route.name === 'index' ? this.$router.go() : this.$router.push('/')
+    },
   },
 }
 </script>
-
-<style scoped>
-h1 {
-  font-size: 20px;
-}
-</style>

@@ -1,5 +1,7 @@
 <template>
   <bef-login-form-card>
+    <toaster />
+
     <v-form ref="form" v-model="isValid">
       <user-form-email :email.sync="params.auth.email" no-validation />
       <user-form-password :password.sync="params.auth.password" no-validation />
@@ -47,10 +49,13 @@ export default {
     // ログイン成功
     async authSuccessful(response) {
       await this.$auth.login(response)
+      this.$router.push(this.$store.state.rememberRoute)
     },
     // ログイン失敗
     authFailure({ response }) {
-      console.log(response)
+      return response.status === 404
+        ? this.$store.dispatch('getToast', { msg: 'ユーザーが見つかりません' })
+        : this.$my.errorHandler(response)
     },
   },
 }

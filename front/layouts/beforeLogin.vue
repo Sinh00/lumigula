@@ -12,6 +12,7 @@
 
 <script>
 export default {
+  middleware: 'loggedInIsRedirects',
   head() {
     return {
       titleTemplate: '',
